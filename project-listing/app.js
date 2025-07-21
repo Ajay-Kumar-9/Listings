@@ -29,8 +29,9 @@ const upload = multer({ dest: 'uploads/' });
 
 // MONGO DB SETUP
 
-
+const PORT = process.env.PORT || 3000;
 const dbUrl = process.env.ATLASDB_URL;
+
 
 main()
   .then(() => {
@@ -123,6 +124,6 @@ app.use((err, req, res, next) => {
 
 
 //BASIC SERVER SETUP
-app.listen(8080, () => {
+app.listen(PORT, () => {
   console.log("server is listening on port 8080");
 });
