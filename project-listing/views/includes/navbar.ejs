@@ -1,0 +1,238 @@
+<style>
+  /* Your existing button and navbar styles (unchanged) */
+  .search-btn {
+    background: #06044B;
+    color: white;
+    border-radius: 1.5rem;
+    padding: 0.35rem 1.2rem;
+    font-weight: 600;
+    border: none;
+    transition: background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(6, 4, 75, 0.6);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .search-btn:hover,
+  .search-btn:focus {
+    background: #03002a;
+    box-shadow: 0 6px 12px rgba(3, 0, 42, 0.8);
+    outline: none;
+    color: white !important;
+  }
+  .search-btn:hover i,
+  .search-btn:focus i {
+    color: white !important;
+  }
+  .search-btn i {
+    font-size: 1rem;
+    color: inherit;
+  }
+
+  .search-inp {
+    border-radius: 1.5rem;
+    padding: 0.5rem 3rem 0.5rem 1.2rem;
+    border: 1.5px solid #ccc;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .search-inp:focus {
+    border-color: #06044B;
+    box-shadow: 0 0 8px rgba(6, 4, 75, 0.6);
+    outline: none;
+  }
+
+  .navbar-nav.ms-auto .nav-link.create-listing {
+    background: #06044B;
+    color: white;
+    padding: 0.5rem 1.25rem;
+    margin-left: 0.5rem;
+    border-radius: 1.5rem;
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(6, 4, 75, 0.6);
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .navbar-nav.ms-auto .nav-link.create-listing:hover,
+  .navbar-nav.ms-auto .nav-link.create-listing:focus {
+    background: #03002a;
+    box-shadow: 0 6px 12px rgba(3, 0, 42, 0.8);
+    color: white;
+    transform: translateY(-2px);
+    outline: none;
+    text-decoration: none;
+  }
+
+  .navbar-nav.ms-auto .nav-link.bw-btn {
+    background: white;
+    color: #06044B;
+    padding: 0.5rem 1.25rem;
+    margin-left: 0.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+    border: 2px solid #06044B;
+    box-shadow: 0 4px 8px rgba(6, 4, 75, 0.2);
+    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+  .navbar-nav.ms-auto .nav-link.bw-btn:hover,
+  .navbar-nav.ms-auto .nav-link.bw-btn:focus {
+    background: #06044B;
+    color: white !important;
+    box-shadow: 0 6px 12px rgba(6, 4, 75, 0.8);
+    transform: translateY(-2px);
+    outline: none;
+    text-decoration: none;
+  }
+  .navbar-nav.ms-auto .nav-link.bw-btn b {
+    color: inherit;
+  }
+  .navbar-nav.ms-auto .nav-link.bw-btn:hover b {
+    color: white !important;
+  }
+
+  .navbar-nav.ms-auto .nav-link.logout-btn {
+    background: white;
+    color: #06044B;
+    padding: 0.5rem 1.25rem;
+    margin-left: 0.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+    border: 2px solid #06044B;
+    box-shadow: 0 4px 8px rgba(6, 4, 75, 0.2);
+    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+  .navbar-nav.ms-auto .nav-link.logout-btn:hover,
+  .navbar-nav.ms-auto .nav-link.logout-btn:focus {
+    background: #06044B;
+    color: white;
+    box-shadow: 0 6px 12px rgba(6, 4, 75, 0.8);
+    transform: translateY(-2px);
+    outline: none;
+    text-decoration: none;
+  }
+
+  .navbar-brand i {
+    color: #06044B;
+  }
+
+  .explore-text {
+    font-weight: bold;
+    font-size: 1.4rem;
+    color: #06044B;
+  }
+
+  /* Responsive styles only */
+  @media (max-width: 768px) {
+    /* Make navbar-nav full width */
+    .navbar-nav {
+      width: 100%;
+    }
+
+    /* Nav links and form full width & centered */
+    .navbar-nav .nav-link,
+    .navbar-nav form {
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+    }
+
+    /* Stack form elements vertically */
+    .navbar-nav form {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    /* Search input full width and remove margin */
+    .search-inp {
+      width: 100%;
+      margin: 0;
+      padding-left: 1.2rem;
+      padding-right: 1.2rem;
+    }
+
+    /* Search button full width */
+    .search-btn {
+      justify-content: center;
+      width: 100%;
+    }
+
+    /* Buttons full width, margin top */
+    .navbar-nav.ms-auto .nav-link.create-listing,
+    .navbar-nav.ms-auto .nav-link.bw-btn,
+    .navbar-nav.ms-auto .nav-link.logout-btn {
+      margin: 0.5rem 0 0 0;
+      width: 100%;
+      border-radius: 1.5rem;
+      justify-content: center;
+    }
+
+    /* ONLY on small screens — hamburger content wrapper fix */
+    .navbar-collapse > .navbar-nav {
+      position: relative;
+      z-index: 1050;
+      background: white;
+      padding: 1rem 0;
+    }
+  }
+</style>
+
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/listings">
+      <i class="fa-solid fa-map-marked-alt fa-2x"></i>
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link explore-text" aria-current="page" href="/listings">Explore</a>
+      </div>
+
+      <div class="navbar-nav ms-auto">
+        <form class="d-flex" role="search">
+          <input
+            class="form-control me-2 search-inp"
+            type="search"
+            placeholder="Search destination"
+          />
+          <button class="btn search-btn" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>Search
+          </button>
+        </form>
+      </div>
+
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link create-listing text-white" href="/listings/new">
+          <i class="fa-solid fa-plus me-2 text-white"></i> Create Listing
+        </a>
+
+        <% if (!currUser) { %>
+          <a class="nav-link bw-btn" aria-current="page" href="/signup"><b>Signup</b></a>
+          <a class="nav-link bw-btn" href="/login"><b>Log in</b></a>
+        <% } else { %>
+          <a class="nav-link logout-btn" href="/logout"><b>Log out</b></a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,109 @@
+<% layout("./layouts/boilerplate.ejs") %>
+
+<style>
+  .full-page-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.1); /* glass effect */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .form-label {
+    font-weight: 500;
+    color: #06044B;  /* changed from #111 to #06044B */
+  }
+
+  h1 {
+    text-align: center;
+    font-weight: bold;
+    color: #06044B; /* changed from #111 */
+    margin-bottom: 30px;
+  }
+
+  input.form-control {
+    background-color: rgba(255, 255, 255, 0.25);
+    color: #06044B; /* changed from #000 */
+    border: 1px solid rgba(6, 4, 75, 0.2); /* subtle outline with #06044B tint */
+    border-radius: 8px;
+    transition: all 0.2s ease-in-out;
+    font-size: 0.95rem;
+  }
+
+  input.form-control::placeholder {
+    font-size: 0.82rem;
+    opacity: 0.5;
+    color: #444; /* you can keep this or adjust if needed */
+  }
+
+  input.form-control:focus {
+    background-color: #fff;
+    color: #06044B; /* focus text color */
+    outline: none;
+    border: 2px solid #06044B; /* changed from bootstrap green to #06044B */
+    box-shadow: 0 0 0 0.15rem rgba(6, 4, 75, 0.25); /* focus glow with #06044B */
+  }
+
+  button.btn-success {
+    background-color: #06044B !important;
+    border-color: #06044B !important;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+
+  button.btn-success:hover,
+  button.btn-success:focus {
+    background-color: #03002a !important; /* darker shade on hover */
+    border-color: #03002a !important;
+    outline: none;
+    box-shadow: 0 0 8px rgba(3, 0, 42, 0.7);
+  }
+</style>
+
+<div class="full-page-wrapper">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="glass-card mt-5">
+          <h1>Login</h1>
+          <form action="/login" method="POST" novalidate class="needs-validation">
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input
+                name="username"
+                id="username"
+                type="text"
+                class="form-control"
+                required
+                placeholder="Enter your username"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input
+                name="password"
+                id="password"
+                type="password"
+                class="form-control"
+                required
+                placeholder="Enter your password"
+              />
+            </div>
+
+            <button class="btn btn-success w-100">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
