@@ -1,10 +1,8 @@
 /* Main file */
 
-
-if(process.env.NODE_ENV != "production"){
+if(process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
-
 
 const express = require("express");
 const app = express();
@@ -24,18 +22,19 @@ const User = require("./models/user.js");
 const userRouter = require("./routes/user.js");
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
-const multer  = require('multer');
+const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 
-// MONGO DB SETUP
+// Import search controller
+const searchController = require('./controllers/search.js');
 
+// MONGO DB SETUP
 const PORT = process.env.PORT || 3000;
 const dbUrl = process.env.ATLASDB_URL;
 
-
 main()
   .then(() => {
-    console.log("connection successfull with db");
+    console.log("Connection successful with DB");
   })
   .catch((err) => console.log(err));
 
@@ -43,7 +42,7 @@ async function main() {
   await mongoose.connect(dbUrl);
 }
 
-//setting view engine for ejs
+// Setting view engine for EJS
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
@@ -52,22 +51,20 @@ app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
 const store = MongoStore.create({
-  mongoUrl : dbUrl,
-  crypto:{
-    secret : process.env.SECRET,
+  mongoUrl: dbUrl,
+  crypto: {
+    secret: process.env.SECRET,
   },
-  touchAfter : 24 * 3600,
+  touchAfter: 24 * 3600,
 });
 
-store.on("error",()=>{
-  console.log("Error in MONGO SESSION STORE", err);
-  
+store.on("error", () => {
+  console.log("Error in MONGO SESSION STORE");
 });
 
-
-//session option 
+// Session options
 const sessionOption = {
-  store, 
+  store,
   secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
@@ -78,21 +75,18 @@ const sessionOption = {
   },
 };
 
-
-
-
-//session 
+// Initialize session
 app.use(session(sessionOption));
 app.use(flash());
 
-//passport 
+// Passport setup
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-//middle for flash msg(res.locals.variable are accessible everywhere);
+// Middleware for flash messages
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
@@ -100,30 +94,31 @@ app.use((req, res, next) => {
   next();
 });
 
-
-
-
-app.get("/", (req,res) => {
-  res.redirect("/listings")
+// Default route
+app.get("/", (req, res) => {
+  res.redirect("/listings");
 });
 
+// Search route
+app.get("/search", searchController);
+
+// Use Routers for Listings, Reviews, and Users
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
 
-//PAGE NOT FOUND ERROR
-
+// 404 Page not found error
 app.all("*", (req, res, next) => {
-  next(new expressError(404, "page not found"));
+  next(new expressError(404, "Page not found"));
 });
 
+// Error handling middleware
 app.use((err, req, res, next) => {
   let { status = 500, message = "Something went wrong" } = err;
   res.status(status).render("error.ejs", { err });
 });
 
-
-//BASIC SERVER SETUP
+// Start server
 app.listen(PORT, () => {
-  console.log("server is listening on port 8080");
+  console.log("Server is listening on port " + PORT);
 });
